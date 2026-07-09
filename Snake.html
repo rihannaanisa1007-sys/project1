@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <meta charset="UTF-8">
+        <title>Snake</title>
+        <style>
+            body {background-color: rgb(219, 235, 219);
+        } 
+
+            h1{
+                font-weight: bold;
+                color: rgb(19, 105, 19);
+            }
+
+            h3{
+                font-weight: bold;
+                color: rgb(19, 105, 19);
+            }
+
+            p{
+                font-family: Arial, Helvetica, sans-serif
+            }
+
+            li{
+                font-family: Arial, Helvetica, sans-serif
+            }
+
+            .char{
+                display: inline-block;
+                transition: color .2s;
+                will-change: color;
+            }
+        </style>
+    </head>
+
+    <body>
+        <li><a href="Welcome.html"> Welcome Page </a></li>
+        <li><a href="index.html">Cat Page</a></li>
+        <li><a href="capybara.html">Capybara Page</a></li>
+
+        <h1>Snakes</h1>
+
+        <p data-colorize="true" style="text-align: center;">Snakes are interesting reptiles!</p>
+        <!-- Snakes are pretty cool animals -->
+
+    <img src="https://www.davincisciencecenter.org/wp-content/uploads/2024/03/Rat-Snake-02.png" alt="Simple drawing of a snake" width="440" height="300">
+
+
+        <h3>Things Snakes Eat</h3>
+        <ul>
+            <li>Rats</li>
+            <li>Birds</li>
+            <li>Frogs</li>
+            <li>Insects</li>
+        </ul>
+
+        <h3>How to draw a Snake</h3>
+        <!-- This is a simple guide on how to draw a snake -->
+        <ol>
+            <li>Draw a long, curved line for the body</li>
+            <li>Draw a triangle for the head at one end of the line</li>
+            <li>Add two small circles for the eyes on the head</li>
+            <li>Add a forked tongue coming out of the mouth</li>
+            <li>Add scales by drawing small, overlapping shapes along the body</li>
+        </ol>
+
+        <!--This is a link to a website with more advanced snake drawing instructions-->
+        <a href = "https://drawingmentor.com/how-to-draw-a-snake/"> Click here to learn how to draw a more advanced snake </a>
+        
+        
+        <!--I searched up how to code a certain text rainbow... took a while-->
+        <script>
+            function colorizeWhole(el){
+                const text = el.textContent || '';
+                el.innerHTML = [...text].map(ch => ch === ' ' ? ' ' : `<span class="char">${ch}</span>`).join('');
+                el.querySelectorAll('.char').forEach((s, i) => {
+                    s.style.color = `hsl(${(i * 30) % 360}, 80%, 50%)`;
+                });
+            }
+
+            function colorizeWord(selector, target){
+                document.querySelectorAll(selector).forEach(el => {
+                    const text = el.textContent || '';
+                    const lower = text.toLowerCase();
+                    const tLower = target.toLowerCase();
+                    const idx = lower.indexOf(tLower);
+                    if(idx === -1) return;
+                    const before = text.slice(0, idx);
+                    const word = text.slice(idx, idx + target.length);
+                    const after = text.slice(idx + target.length);
+                    const wrapped = [...word].map(ch => ch === ' ' ? ' ' : `<span class="char">${ch}</span>`).join('');
+                    el.innerHTML = before + wrapped + after;
+                    el.querySelectorAll('.char').forEach((s, i) => {
+                        s.style.color = `hsl(${(i * 30) % 360}, 80%, 50%)`;
+                    });
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                colorizeWord('[data-colorize="true"]', 'interesting');
+            });
+        </script>
+    </body>
+
+</html>
